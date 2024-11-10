@@ -13,29 +13,11 @@ public class CompanyTcpProxy implements Company {
         this.tcpClient = tcpClient;
     }
 
-    private class CompanyTcpIterator implements Iterator<Employee> {
-        @Override
-        public boolean hasNext() {
-            String jsonStr = tcpClient.sendAndReceive("hasNextEmployee", "");
-            return Boolean.valueOf(jsonStr);
-        }
-
-        @Override
-        public Employee next() {
-            String jsonStr = tcpClient.sendAndReceive("getNextEmployee", "");
-            return Employee.getEmployee(jsonStr);
-        }
-
-        @Override
-        public void remove() {
-            tcpClient.sendAndReceive("removeCurrentEmployee", "");
-        }
-    }
-
     @Override
     public Iterator<Employee> iterator() {
-        return new CompanyTcpIterator();
+        throw new UnsupportedOperationException("Unimplemented method 'iterator'");
     }
+    
 
     @Override
     public void addEmployee(Employee empl) {

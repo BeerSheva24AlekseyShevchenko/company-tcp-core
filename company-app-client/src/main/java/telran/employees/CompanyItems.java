@@ -13,7 +13,6 @@ public class CompanyItems {
         Item[] items = {
                 Item.of("Add Employee", CompanyItems::addEmployee),
                 Item.of("Display Employee Data", CompanyItems::displayEmployee),
-                Item.of("Display all Employees", CompanyItems::displayAllEmployee),
                 Item.of("Fire Employee", CompanyItems::fireEmployee),
                 Item.of("Department Salary Budget", CompanyItems::displayDepartmentSalaryBudget),
                 Item.of("List of Departments", CompanyItems::displayDepartments),
@@ -32,10 +31,6 @@ public class CompanyItems {
         long id = io.readLong("Enter ID:", null);
         Employee empl = company.getEmployee(id);
         io.writeLine(empl == null ? "Employee not found" : empl);
-    }
-
-    private static void displayAllEmployee(InputOutput io) {
-        company.forEach(i -> io.writeLine(i));
     }
 
     private static void fireEmployee(InputOutput io) {
