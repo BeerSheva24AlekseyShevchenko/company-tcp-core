@@ -1,8 +1,5 @@
 package telran.employees;
 
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Function;
 
 import telran.net.Protocol;
@@ -11,20 +8,10 @@ import telran.net.Response;
 import telran.net.ResponseCode;
 
 public class CompanyProtocol implements Protocol {
-    private Map<String, Function<String, String>> services = new HashMap<>();
+    private CompanyServices services;
 
-    public CompanyProtocol(Object services) {
-        for (Method method : services.getClass().getDeclaredMethods()) {
-            if (method.isAnnotationPresent(AppService.class)) {
-                this.services.put(method.getName(), str -> {
-                    try {
-                        return (String) method.invoke(services, str);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                });
-            }
-        };
+    public CompanyProtocol(CompanyServices services) {
+        this.services = services;
     }
 
     @Override
