@@ -1,0 +1,2 @@
+{"hours":100,"salary":10000,"className":"telran.employees.SalesPerson","id":1000,"department":"QA","percent":1.5,"sales":10000,"wage":100}
+{"salary":10000,"className":"telran.employees.Manager","id":1001,"department":"QA","factor":1.8}
