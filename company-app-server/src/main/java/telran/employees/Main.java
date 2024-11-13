@@ -11,8 +11,7 @@ public class Main {
         if (company instanceof Persistable persistable) {
             persistable.restoreFromFile("employees.data");
         }
-        CompanyServices services = new CompanyServices(company);
-        CompanyProtocol protocol = new CompanyProtocol(services);
+        CompanyProtocol protocol = new CompanyProtocol(company);
         TcpServer tcpServer = new TcpServer(protocol, PORT);
         tcpServer.run();
     }
