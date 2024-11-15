@@ -27,8 +27,9 @@ public class Main {
         Item[] res = Arrays.copyOf(items, items.length + 1);
         res[items.length] = Item.of("Exit", io -> {
             try {
-                if (netClient instanceof Closeable closeable)
-                closeable.close();
+                if (netClient instanceof Closeable closeable) {
+                    closeable.close();
+                }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

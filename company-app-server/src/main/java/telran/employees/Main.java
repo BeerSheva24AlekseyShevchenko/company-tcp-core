@@ -1,6 +1,5 @@
 package telran.employees;
 
-import telran.io.Persistable;
 import telran.net.TcpServer;
 
 public class Main {
@@ -8,9 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         Company company = new CompanyImpl();
-        if (company instanceof Persistable persistable) {
-            persistable.restoreFromFile("employees.data");
-        }
+        DataManager.of(company).setSaveInterval(5000).run();
         CompanyProtocol protocol = new CompanyProtocol(company);
         TcpServer tcpServer = new TcpServer(protocol, PORT);
         tcpServer.run();
