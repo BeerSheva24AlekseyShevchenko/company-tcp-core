@@ -18,24 +18,25 @@ public class DataManager implements Runnable {
         this.fileName = fileName;
         this.saveInterval = saveInterval;
         this.data = data;
-
-        data.restoreFromFile(fileName);
     }
 
     @Override
     public void run() {
+        data.restoreFromFile(fileName);
+        
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> data.saveToFile(fileName)));
+
         Thread thread = new Thread(() -> {
-            while (true) {
-                try {
+            try {
+                while (true) {
                     Thread.sleep(saveInterval);
                     data.saveToFile(fileName);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    Thread.currentThread().interrupt();
-                    break;
                 }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         });
+        thread.setDaemon(true);
         thread.start();
     }
 }
